@@ -1,0 +1,16 @@
+import java.util.ArrayList;
+
+public class Challenge{
+    public static void removeShared(ArrayList<Integer> list1, ArrayList<Integer> list2){
+        ArrayList<Integer> sharedValues = new ArrayList<>();
+
+        for (Integer value : list1) {
+            if (list2.contains(value)) {
+                sharedValues.add(value);
+            }
+        }
+
+        list1.removeAll(sharedValues);
+        list2.removeAll(sharedValues);
+    }
+}
