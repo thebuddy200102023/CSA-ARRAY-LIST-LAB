@@ -1,0 +1,12 @@
+import java.util.ArrayList;
+
+public class Challenge{
+    public static double average(ArrayList<Double> numbers){
+        double total = 0;
+
+        for (double number: numbers){
+            total += number;
+        }
+        return total/numbers.size();
+    }
+}
