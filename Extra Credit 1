@@ -1,0 +1,13 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Challenge{
+    public static int totals(ArrayList<Integer> numbers){
+        int total = 0;
+
+        for (int number: numbers){
+            total += number;
+        }
+        return total; 
+    }
+}
