@@ -1,0 +1,178 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ALDataSet {
+    public static void main(String[] args) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("---ArrayList Data Set---");
+        int choice;
+
+        while (true) {
+            printArrayList();
+            System.out.print("Enter selection: ");
+            choice = scanner.nextInt();
+
+            if (choice == 0) {
+                System.out.println("\nGood Bye.");
+                break;
+            }
+
+            if (choice == 1) {
+                addValues(arrayList, scanner);
+            } else if (choice == 2) {
+                changeValue(arrayList, scanner);
+            } else if (choice == 3) {
+                insertValue(arrayList, scanner);
+            } else if (choice == 4) {
+                getIndex(arrayList, scanner);
+            } else if (choice == 5) {
+                getSize(arrayList);
+            } else if (choice == 6) {
+                printList(arrayList);
+            } else if (choice == 7) {
+                printTotal(arrayList);
+            } else if (choice == 8) {
+                printAverage(arrayList);
+            } else if (choice == 9) {
+                removeValue(arrayList, scanner);
+            } else if (choice == 10) {
+                removeLocation(arrayList, scanner);
+            } else if (choice == 11) {
+                clearList(arrayList);
+            } else {
+                System.out.println("Invalid selection. Please try again.");
+            }
+        }
+    }
+
+    private static void printArrayList() {
+        System.out.println("\n-Menu-\n" +
+                "1. Add values\n" +
+                "2. Change a value\n" +
+                "3. Insert a value\n" +
+                "4. Get Index\n" +
+                "5. Get Size\n" +
+                "6. Print\n" +
+                "7. Total\n" +
+                "8. Average\n" +
+                "9. Remove a value\n" +
+                "10. Remove a location\n" +
+                "11. Clear\n" +
+                "0. Exit");
+    }
+    private static void printMenu(){
+        System.out.println("\n-Menu-\n" + "1. Add values\n" + "2. Change a value\n" + "3. Insert a value\n" + "4. Get Index\n" + "5. Get Size\n" + "6. Print\n" + "7. Total\n" + "8. Average\n" + "9. Remove a value\n" + "10. Remove a location\n" + "11. Clear\n" + "0. Exit");
+    }
+    private static void addValues(ArrayList<Integer> arrayList, Scanner sc) {
+        System.out.println("");
+        int value;
+        do {
+            System.out.print("Enter a number (0 when done): ");
+            value = sc.nextInt();
+            if (value != 0) {
+                arrayList.add(value);
+            }
+        } while (value != 0);
+    }
+    private static void changeValue(ArrayList<Integer> arrayList, Scanner sc) {
+        System.out.println("");
+        System.out.print("Enter the index you want to change: ");
+        int index = sc.nextInt();
+        if (isValidIndex(index, arrayList)) {
+            System.out.print("Enter the new value: ");
+            int newValue = sc.nextInt();
+            arrayList.set(index, newValue);
+            System.out.println("Value at index " + index + " changed to " + newValue);
+        } else {
+            System.out.println("Invalid index. Please try again.");
+        }
+    }
+    private static void insertValue(ArrayList<Integer> arrayList, Scanner sc) {
+        System.out.println("");
+        System.out.print("Enter the index where you want to insert a value: ");
+        int index = sc.nextInt();
+        if (isValidIndex(index, arrayList)) {
+            System.out.print("Enter the new value: ");
+            int newValue = sc.nextInt();
+            arrayList.add(index, newValue);
+            System.out.println(newValue + " was inserted into spot " + index);
+        } else {
+            System.out.println("Invalid index. Please try again.");
+        }
+    }
+    private static void getIndex(ArrayList<Integer> arrayList, Scanner sc) {
+        System.out.println("");
+        System.out.print("Enter the index to get the value: ");
+        int index = sc.nextInt();
+        if (isValidIndex(index, arrayList)) {
+            System.out.println("Value at index " + index + " is: " + arrayList.get(index));
+        } else {
+            System.out.println("Invalid index. Please try again.");
+        }
+    }
+    private static void getSize(ArrayList<Integer> arrayList) {
+        System.out.println("");
+        System.out.println("The list has " + arrayList.size() + " items.");
+    }
+
+    private static void printList(ArrayList<Integer> arrayList) {
+        System.out.println("");
+        System.out.println("The list contains the following data " + arrayList);
+    }
+    private static void printTotal(ArrayList<Integer> arrayList) {
+        System.out.println("");
+        int total = 0;
+        for (int value : arrayList) {
+            total += value;
+        }
+        System.out.println("The total of the numbers in the list is " + total);
+    }
+    private static void printAverage(ArrayList<Integer> arrayList) {
+        System.out.println("");
+        if (!arrayList.isEmpty()) {
+            int total = 0;
+            for (int value : arrayList) {
+                total += value;
+            }
+            int average = total / arrayList.size();
+            System.out.println("The average of the numbers in the list is " + average);
+        } else {
+            System.out.println("The list is empty. Cannot calculate average.");
+        }
+    }
+
+    private static void removeValue(ArrayList<Integer> arrayList, Scanner sc) {
+        System.out.println("");
+        System.out.print("Enter the value to remove: ");
+        int value = sc.nextInt();
+        if (arrayList.remove(Integer.valueOf(value))) {
+            System.out.println("Remove successful");
+        } else {
+            System.out.println("Value not found.");
+        }
+    }
+
+    private static void removeLocation(ArrayList<Integer> arrayList, Scanner sc) {
+        System.out.println("");
+        System.out.print("Enter the index you want to remove: ");
+        int index = sc.nextInt();
+        if (isValidIndex(index, arrayList)) {
+            int removedValue = arrayList.remove(index);
+            System.out.println(removedValue + " was removed at index " + index + ".");
+        } else {
+            System.out.println("Invalid index. Please try again.");
+        }
+    }
+
+    private static void clearList(ArrayList<Integer> arrayList) {
+        System.out.println("");
+        arrayList.clear();
+        System.out.println("The list has been cleared.");
+    }
+
+    private static boolean isValidIndex(int index, ArrayList<Integer> arrayList) {
+        System.out.println("");
+        return index >= 0 && index < arrayList.size();
+    }
+}
