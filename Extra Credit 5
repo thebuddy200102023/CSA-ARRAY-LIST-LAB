@@ -1,0 +1,21 @@
+import java.util.ArrayList;
+
+public class Challenge{
+    public static ArrayList<Integer> merge(ArrayList<Integer> list1, ArrayList<Integer> list2){
+        ArrayList<Integer> result = new ArrayList<>();
+
+        for (Integer value : list1) {
+            if (!result.contains(value)) {
+                result.add(value);
+            }
+        }
+
+        for (Integer value : list2) {
+            if (!result.contains(value)) {
+                result.add(value);
+            }
+        }
+
+        return result;
+    }
+}
