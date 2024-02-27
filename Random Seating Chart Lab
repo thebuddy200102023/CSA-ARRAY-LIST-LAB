@@ -1,0 +1,55 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class RandomSeatingChart{
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter students' names on their own line (Enter \"Done\" when finished):");
+        ArrayList<String> students = new ArrayList<>();
+
+        String studentName;
+        while (true) {
+            studentName = scanner.nextLine();
+            if (studentName.equalsIgnoreCase("Done")) {
+                break;
+            }
+            students.add(Character.toUpperCase(studentName.charAt(0)) + studentName.substring(1));
+        }
+
+        System.out.println("");
+        System.out.print("Enter the number of seats in your classroom: ");
+        int numSeats = scanner.nextInt();
+
+        ArrayList<Integer> seats = new ArrayList<>();
+        for (int i = 1; i <= numSeats; i++) {
+           seats.add(i);
+        }
+
+        String seatingResults = seatingChart(students, seats);
+        System.out.println(seatingResults);
+    }
+    public static String seatingChart(ArrayList<String> students, ArrayList<Integer> seats){
+        if (seats.size() < students.size()){
+           return "Error not enough seats.";
+        }
+        else {
+            for (int i = seats.size() - 1; i > 0; i--) {
+               int j = (int) (Math.random() * (i + 1));
+               int temp = seats.get(i);
+               seats.set(i, seats.get(j));
+               seats.set(j, temp);
+            }
+
+            System.out.println();
+            System.out.println("The seating chart is:");
+            String result = "";
+
+            for (int i = 0; i < students.size(); i++) {
+                result +=  students.get(i) + "-" + seats.get(i) + "\n";
+            }
+
+            return result;
+        }
+    }
+}
