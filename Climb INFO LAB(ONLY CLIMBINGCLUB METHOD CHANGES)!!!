@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class ClimbingClub {
+    private List<ClimbInfo> climbList;
+    public ClimbingClub() {
+        climbList = new ArrayList<>();
+    }
+    public void addClimb_A(String peakName, int climbTime) {
+        climbList.add(new ClimbInfo(peakName, climbTime));
+    }
+    public void addClimb_B(String peakName, int climbTime) {
+        int i = 0;
+        for (i = 0; i < climbList.size(); i++) {
+            if (climbList.get(i).getName().compareTo(peakName) > 0) {
+                break;
+            }
+        }
+        climbList.add(i, new ClimbInfo(peakName, climbTime));
+    }
+    public int distinctPeakNames() {
+        if (climbList.isEmpty())
+        {
+            return 0;
+        }
+        ClimbInfo currInfo = climbList.get(0);
+        String prevName = currInfo.getName();
+        String currName;
+        int numNames = 1;
+        for (int k = 1; k < climbList.size(); k++)
+        {
+            currInfo = climbList.get(k);
+            currName = currInfo.getName();
+            if (prevName.compareTo(currName) != 0)
+            {
+                numNames++;
+                prevName = currName;
+            }
+        }
+        return numNames;
+    }
+    public String toString(){
+        return climbList.toString();
+    }
+}
